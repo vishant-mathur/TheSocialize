@@ -1,6 +1,13 @@
 from django.shortcuts import redirect, render
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
+# from django.contrib.auth import authenticate, login, logout
+from social.models import User_signup
 from django.contrib import messages
+from django import forms  
+from django.views.decorators.csrf import csrf_exempt
+from social.user_signin import Usersignup
+
+
 
 
 def index(request):
@@ -10,22 +17,39 @@ def choice1(request):
 def choice(request):
     return render(request,'choice.html')
 
+@csrf_exempt
+def signin(request):
+    if request.method == 'POST':
+
+        password = request.POST.get('password')
+        Name = request.POST.get('Name')
+        user = User_signup.objects.filter(password=password, Name=Name).count()
+        print("____", user)
+
+        if user == 1:
+            user = User_signup.objects.filter(password=password, Name=Name)
+            for l1 in user:
+                request.session['Name'] = l1.Name
+                request.session['id'] = l1.id
+                print(l1.Name)
+                request.session['id'] = l1.id
+                return redirect('/')
+        else:
+            messages.error(request, 'Invalid Name and password')
+        return render(request, 'signin.html')
+    else:
+        return render(request, 'signin.html')
+
 def signup(request):
     if request.method=="POST":
-        Name=request.POST['Name']
-        email=request.POST['email']
-        password=request.POST['password']
-        confirmpassword=request.POST['confirmpassword']
+        form=Usersignup(request.POST)
+        try:
+            form.save()
+            return redirect('/signin')
+        except:
+            pass
 
-    if User.objects.filter(Name=Name):
-        messages.error(request,"Name alreay exit please try again")
-        return redirect('index')
-    if User.objects.filter(email=email).exists():
-        messages.error(request,"email already exist ")
-        return redirect('index')
-    if len(Name)>10:
-        messages.error(request,"Invalid username")
-    if password != confirmpassword:
-        messages.error(request,"Invalid Password , Please check!!")
-             
-    return render(request,'signup.html')
+    else:
+        form=Usersignup()
+        context={'form':form}
+        return render(request,'signup.html',context)

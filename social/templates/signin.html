@@ -32,7 +32,7 @@
             <link rel="stylesheet" href="{% static 'https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css '%}" media="screen">
             <div class="health_section layout_padding">
                 <div class="container">
-                   <h1 class="health_taital">Sign in</h1>
+                   <h1 class="health_taital">User Sign in</h1>
                    <p class="health_text">Enter the details correctly</p>
                    <div class="contact_box">
                     {% for message in messages%}
@@ -44,16 +44,26 @@
                         <span arial-hidden='true'>&times;</span>
                         </div>
                      {% endfor %}
-                        <h1 class="book_text">{{ msg }}</h1>
-                    <form action="/signin/" method="POST" >
-                        {% csrf_token %}
-                        
-                    <input type="text" class="Email_text" placeholder="Name(only letters)" required id="username" name="Name">
-                  
-                    <input type="password" class="Email_text" placeholder="password" required id="password"  name="password">
-                  
+               
+                     <form class="form-group" method="POST" class="post-form" enctype="multipart/form-data">
+                       
                     
-                    <button type="submit"class="btn btn-primary" id="liveToastBtn">Sign in</button>
+                        
+                         <input class="form-control"type="text" name="Name"  placeholder="Name*"><br>
+
+                     
+                     
+                        
+                        
+                         <input class="form-control"type="password" name="password"  placeholder="Enter Password"><br>
+                    
+                    
+                        <button type="submit" class="btn btn-style-one">login</button>
+
+                           
+
+                     
+                    </form>
 
                     
 
