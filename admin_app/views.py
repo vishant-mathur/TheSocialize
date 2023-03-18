@@ -59,4 +59,8 @@ def test(request):
     return render(request,'test.html',{'form':form})  
 def show(request):  
     event = CreateEvent.objects.all()  
-    return render(request,"show.html",{'event':event})  
+    return render(request,"show.html",{'event':event})
+def destroy(request, id):  
+    event = CreateEvent.objects.get(id=id)  
+    event.delete()  
+    return redirect("/show")    
