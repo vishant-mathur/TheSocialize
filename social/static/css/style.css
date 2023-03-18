@@ -276,7 +276,7 @@ button {
     width: 100%;
     float: left;
     font-size: 60px;
-    color: #15e4d0;
+    color: #c71de3;
     font-weight: bold;
     line-height: 60px;
     padding-top: 120px;
@@ -306,7 +306,7 @@ button {
     float: left;
     font-size: 18px;
     color: #f6f8f8;
-    background-color: #4bc5b8;
+    background-color: #c71de3;
     text-align: center;
     padding: 10px 0px;
 }
