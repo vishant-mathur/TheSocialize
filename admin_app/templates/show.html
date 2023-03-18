@@ -21,19 +21,23 @@
     <thead class="thead-dark">  
     <tr>  
        
+        <th>Event id</th>  
         <th>Event Name</th>  
         <th>Event Address</th>  
         <th>Event Date</th>  
         <th>Event dispcription</th>  
+        <th>Action</th>  
     </tr>  
     </thead>  
     <tbody>  
 {% for i in event %}  
     <tr>    
+        <td>{{ i.id }}</td>  
         <td>{{ i.event_name }}</td>  
         <td>{{ i.event_address }}</td>  
         <td>{{ i.date_time }}</td>  
         <td>{{ i.event_dis }}</td>  
+        <td><a href="/delete/{{ i.id }}">Delete</a>  </td>  
         {% comment %} <td>  
             <a href="/edit/{{ i.e }}"><span class="glyphicon glyphicon-pencil" >Edit</span></a>  
             <a href="/delete/{{ i.id }}">Delete</a>  
